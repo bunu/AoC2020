@@ -1,3 +1,5 @@
+from math import prod
+
 def slopeCheck(treeMap, xMov, yMov):
     xPos = 0
     yPos = 0
@@ -15,7 +17,11 @@ def part1(treeMap):
     return slopeCheck(treeMap,3,1)
 
 def part2(treeMap):
-    return slopeCheck(treeMap,1,1) * slopeCheck(treeMap,3,1) * slopeCheck(treeMap,5,1) * slopeCheck(treeMap,7,1) * slopeCheck(treeMap,1,2)
+    slopes = [[1,1],[3,1],[5,1],[7,1],[1,2]]
+    treeList = []
+    for slope in slopes:
+        treeList.append(slopeCheck(treeMap,*slope))
+    return prod(treeList)
 
 treeMap = [l.strip("\n") for l in open("input","r").readlines()]
 print(part1(treeMap))
