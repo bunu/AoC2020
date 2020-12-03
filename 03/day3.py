@@ -18,10 +18,7 @@ def part1(treeMap):
 
 def part2(treeMap):
     slopes = [[1,1],[3,1],[5,1],[7,1],[1,2]]
-    treeList = []
-    for slope in slopes:
-        treeList.append(slopeCheck(treeMap,*slope))
-    return prod(treeList)
+    return prod([slopeCheck(treeMap,*slope) for slope in slopes]) 
 
 treeMap = [l.strip("\n") for l in open("input","r").readlines()]
 print(part1(treeMap))
