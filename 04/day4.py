@@ -26,7 +26,7 @@ def validhgt(param):
     unit = param[len(param)-2:len(param)]
     if unit == "cm":
         return validNumber(number,150,193)
-    if unit == "in":
+    elif unit == "in":
         return validNumber(number,59,76)
     else:
         return False
@@ -42,16 +42,7 @@ def validhcl(param):
         return True
 
 def validecl(param):
-    switch = {
-        "amb":True,
-        "blu":True,
-        "brn":True,
-        "gry":True,
-        "grn":True,
-        "hzl":True,
-        "oth":True,
-    }
-    return switch.get(param,False)
+    return param in ["amb","blu","brn","gry","grn","hzl","oth"]
 
 def validpid(param):
     if len(param) == 9:
@@ -71,12 +62,8 @@ def validParamNumber(passports):
     for passport in passports:
         if(len(passport) == 8):
            validList.append(passport)
-        if(len(passport) == 7):
-            containsCID = False
-            for p in passport:
-                if p[0] == "cid":
-                    containsCID = True
-            if not containsCID:
+        elif(len(passport) == 7):
+            if not "cid" in [param[0] for param in passport]:
                 validList.append(passport)
     return validList
 
@@ -111,6 +98,6 @@ def part2(passports):
     validPassports = validContents(validPassports)
     return len(validPassports)
 
-passports = splitPassports([ l.replace("\n", " ").split(" ") for l in open("input","r").read().split("\n\n")])
+passports = splitPassports([ l.replace("\n", " ").strip(" ").split(" ") for l in open("input","r").read().split("\n\n")])
 print(part1(passports))
 print(part2(passports))
