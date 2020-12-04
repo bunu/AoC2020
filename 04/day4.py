@@ -4,13 +4,13 @@ def splitPassports(passports):
         splitPassports.append([param.split(":") for param in passport])
     return splitPassports
 
-def validNumber(param,low,high):
+def validNumber(number,low,high):
     try:
-        int(param)
+        int(number)
     except ValueError:
-        return false
+        return False
     else:
-        return (int(param) >= low and int(param) <= high)
+        return (int(number) >= low and int(number) <= high)
 
 def validbyr(param):
     return validNumber(param,1920,2002)
@@ -97,6 +97,7 @@ def validContents(passports):
             func = switch.get(param[0], default)
             if not func(param[1]):
                 valid = False
+                break
         if valid:
             validList.append(passport)
     return validList
