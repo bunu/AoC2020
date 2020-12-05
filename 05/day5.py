@@ -1,9 +1,5 @@
 def decodeSeats(seats):
-    seatNums = []
-    for seat in seats:
-        row = int(seat[:7].replace("B","1").replace("F","0"),2)
-        col = int(seat[7:].replace("R","1").replace("L","0"),2)
-        seatNums.append((row * 8) + col)
+    seatNums = [int(seat.translate(seat.maketrans("FBLR","0101")),2) for seat in seats]
     return sorted(seatNums)
 
 def part1(seats):
